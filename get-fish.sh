@@ -36,5 +36,7 @@ if [ "$EUID" -ne 0 ] ; then
     usermod --shell $FISH_PATH $USER
 else
     sed -i 's/\/bin\/ash/\/usr\/bin\/fish/g' /etc/passwd
+    sed -i 's/\/bin\/bash/\/usr\/bin\/fish/g' /etc/passwd
+    sed -i 's/\/bin\/zsh/\/usr\/bin\/fish/g' /etc/passwd
 fi
 $FISH_PATH
