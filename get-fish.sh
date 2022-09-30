@@ -1,3 +1,4 @@
+ #!/bin/sh
 if [ "$EUID" -ne 0 ] ; then
     FISH_CONFIG="$HOME/.config/fish/config.fish"
     mkdir -p "$HOME/.config/fish/"
