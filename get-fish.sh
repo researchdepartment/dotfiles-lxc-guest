@@ -31,5 +31,10 @@ fi
 
 FISH_PATH=$(cat /etc/shells | grep fish | head -n1)                                                    
 curl -LJo $FISH_CONFIG https://github.com/researcx/dotfiles-install-shell-fish/raw/main/config.fish
-usermod --shell $FISH_PATH $USER
+
+if [ "$EUID" -ne 0 ] ; then
+    usermod --shell $FISH_PATH $USER
+else
+    sed -i 's/\/bin\/ash/\/usr\/bin\/fish/g' /etc/passwd
+fi
 $FISH_PATH
