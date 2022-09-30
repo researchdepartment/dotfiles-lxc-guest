@@ -1,5 +1,5 @@
  #!/bin/bash
-if [ "$EUID" -ne 0 ] ; then
+if [ "$(id -u)" != "0" ]; then
     FISH_CONFIG="$HOME/.config/fish/config.fish"
     mkdir -p "$HOME/.config/fish/"
     SUDO="sudo"
@@ -32,7 +32,7 @@ fi
 FISH_PATH=$(cat /etc/shells | grep fish | head -n1)                                                    
 curl -LJo $FISH_CONFIG https://github.com/researcx/dotfiles-install-shell-fish/raw/main/config.fish
 
-if [ "$EUID" -ne 0 ] ; then
+if [ "$(id -u)" != "0" ]; then
     usermod --shell $FISH_PATH $USER
 else
     sed -i 's/\/bin\/ash/\/usr\/bin\/fish/g' /etc/passwd
