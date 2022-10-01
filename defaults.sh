@@ -46,14 +46,15 @@ if command -v pacman >/dev/null; then
 	   #$SUDO chmod 700 /etc/cron.daily/pacman-autoupgrade
 fi
 
-FISH_PATH=$(cat /etc/shells | grep fish | head -n1 | sed 's/\//\\\//g')
+FISH_PATH=$(cat /etc/shells | grep fish | head -n1)
+FISH_PATH_ESC=$(cat /etc/shells | grep fish | head -n1 | sed 's/\//\\\//g')
 FISH_CONFIG="/etc/fish/config.fish"
 mkdir -p "/etc/fish/"
                                                   
 curl -LJo $FISH_CONFIG https://github.com/researcx/dotfiles-install-shell-fish/raw/main/config.fish
 
-$SUDO sed -i "s/\/bin\/ash/$FISH_PATH/g" /etc/passwd
-$SUDO sed -i "s/\/bin\/bash/$FISH_PATH/g" /etc/passwd
-$SUDO sed -i "s/\/bin\/zsh/$FISH_PATH/g" /etc/passwd
+$SUDO sed -i "s/\/bin\/ash/$FISH_PATH_ESC/g" /etc/passwd
+$SUDO sed -i "s/\/bin\/bash/$FISH_PATH_ESC/g" /etc/passwd
+$SUDO sed -i "s/\/bin\/zsh/$FISH_PATH_ESC/g" /etc/passwd
 
-$FISH_PATH
+su $USER
