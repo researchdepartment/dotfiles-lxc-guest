@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 if [ "$(id -u)" != "0" ]; then
     SUDO="sudo"
 else
@@ -37,13 +37,13 @@ if command -v apk >/dev/null; then
     $SUDO rc-service crond start && \
     $SUDO rc-update add crond
     $SUDO echo -e "#!/bin/sh\napk upgrade --update | sed \"s/^/[\`date\`] /\" >> /dev/null" > /etc/periodic/daily/apk-autoupgrade && \
-	   $SUDO chmod 700 /etc/periodic/daily/apk-autoupgrade
+    $SUDO chmod 700 /etc/periodic/daily/apk-autoupgrade
 fi
 
 if command -v pacman >/dev/null; then
     $SUDO pacman -S fish nano --noconfirm
     #$SUDO echo -e "#!/bin/sh\npacman -Syy && pacman -Su --noconfirm" > /etc/cron.daily/pacman-autoupgrade && \
-	   #$SUDO chmod 700 /etc/cron.daily/pacman-autoupgrade
+    #$SUDO chmod 700 /etc/cron.daily/pacman-autoupgrade
 fi
 
 FISH_PATH=$(cat /etc/shells | grep fish | head -n1)
