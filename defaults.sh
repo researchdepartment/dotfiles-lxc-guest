@@ -25,7 +25,7 @@ fi
 if command -v apt >/dev/null; then
     $SUDO apt -y install fish nano
     $SUDO apt -y install unattended-upgrades
-    $SUDO dpkg-reconfigure -f noninteractive unattended-upgrade
+    $SUDO dpkg-reconfigure -f noninteractive unattended-upgrades
     $SUDO echo 'APT::Periodic::AutocleanInterval "7";' >> /etc/apt/apt.conf.d/20auto-upgrades
     $SUDO systemctl enable unattended-upgrades
     $SUDO systemctl start unattended-upgrades
